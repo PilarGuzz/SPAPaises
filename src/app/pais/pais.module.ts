@@ -4,8 +4,7 @@ import { PorCapitalComponent } from './pages/por-capital/por-capital.component';
 import { PorPaisComponent } from './pages/por-pais/por-pais.component';
 import { PorRegionComponent } from './pages/por-region/por-region.component';
 import { VerPaisComponent } from './pages/ver-pais/ver-pais.component';
-import { BusquedaComponent } from './components/busqueda/busqueda.component';
-import { ResultadoComponent } from './components/resultado/resultado.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -14,12 +13,11 @@ import { ResultadoComponent } from './components/resultado/resultado.component';
     PorCapitalComponent,
     PorPaisComponent,
     PorRegionComponent,
-    VerPaisComponent,
-    BusquedaComponent,
-    ResultadoComponent
+    VerPaisComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ]
 })
 export class PaisModule { }
