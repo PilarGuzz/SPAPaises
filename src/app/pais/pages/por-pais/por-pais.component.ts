@@ -9,25 +9,30 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class PorPaisComponent implements OnInit {
   nuevo: string = "";
+  paises: SPAPaises[] = [];
+  error: boolean = false;
 
   constructor(private PaisService : PaisServicesService, private rutaActiva: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
 
-  get results(): SPAPaises[]{
-    return this.PaisService.paises
-  }
+  // get results(): SPAPaises[]{
+  //   return this.PaisService.paises
+  // }
 
   busqueda(){
-
     this.PaisService.buscarPais(this.nuevo)
-       .subscribe({
+    .subscribe({
       next: (resp) => {
-      this.PaisService.paises = resp
-    },
+        this.paises = resp
+        this.error = false;
+      },
     error: (err) => {
+      this.error=true
+      this.paises=[]
     }
+    
 
     })
   
