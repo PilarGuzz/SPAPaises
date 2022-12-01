@@ -33,7 +33,7 @@ export interface SPAPaises {
     flag:         string;
     maps:         Maps;
     population:   number;
-    gini:         Gini;
+    gini:         { [key: string]: number };
     fifa:         string;
     car:          Car;
     timezones:    string[];
@@ -42,7 +42,7 @@ export interface SPAPaises {
     coatOfArms:   CoatOfArms;
     startOfWeek:  string;
     capitalInfo:  CapitalInfo;
-    postalCode:   PostalCode;
+    postalCode?:  PostalCode;
 }
 
 export interface CapitalInfo {
@@ -60,10 +60,11 @@ export interface CoatOfArms {
 }
 
 export interface Currencies {
-    PEN: Pen;
+    PEN?: Gyd;
+    GYD?: Gyd;
 }
 
-export interface Pen {
+export interface Gyd {
     name:   string;
     symbol: string;
 }
@@ -78,19 +79,16 @@ export interface Eng {
     m: string;
 }
 
-export interface Gini {
-    "2019": number;
-}
-
 export interface Idd {
     root:     string;
     suffixes: string[];
 }
 
 export interface Languages {
-    aym: string;
-    que: string;
-    spa: string;
+    aym?: string;
+    que?: string;
+    spa?: string;
+    eng?: string;
 }
 
 export interface Maps {
@@ -105,9 +103,10 @@ export interface Name {
 }
 
 export interface NativeName {
-    aym: Translation;
-    que: Translation;
-    spa: Translation;
+    aym?: Translation;
+    que?: Translation;
+    spa?: Translation;
+    eng?: Translation;
 }
 
 export interface Translation {
@@ -291,7 +290,7 @@ const typeMap: any = {
         { json: "flag", js: "flag", typ: "" },
         { json: "maps", js: "maps", typ: r("Maps") },
         { json: "population", js: "population", typ: 0 },
-        { json: "gini", js: "gini", typ: r("Gini") },
+        { json: "gini", js: "gini", typ: m(3.14) },
         { json: "fifa", js: "fifa", typ: "" },
         { json: "car", js: "car", typ: r("Car") },
         { json: "timezones", js: "timezones", typ: a("") },
@@ -300,7 +299,7 @@ const typeMap: any = {
         { json: "coatOfArms", js: "coatOfArms", typ: r("CoatOfArms") },
         { json: "startOfWeek", js: "startOfWeek", typ: "" },
         { json: "capitalInfo", js: "capitalInfo", typ: r("CapitalInfo") },
-        { json: "postalCode", js: "postalCode", typ: r("PostalCode") },
+        { json: "postalCode", js: "postalCode", typ: u(undefined, r("PostalCode")) },
     ], false),
     "CapitalInfo": o([
         { json: "latlng", js: "latlng", typ: a(3.14) },
@@ -314,9 +313,10 @@ const typeMap: any = {
         { json: "svg", js: "svg", typ: "" },
     ], false),
     "Currencies": o([
-        { json: "PEN", js: "PEN", typ: r("Pen") },
+        { json: "PEN", js: "PEN", typ: u(undefined, r("Gyd")) },
+        { json: "GYD", js: "GYD", typ: u(undefined, r("Gyd")) },
     ], false),
-    "Pen": o([
+    "Gyd": o([
         { json: "name", js: "name", typ: "" },
         { json: "symbol", js: "symbol", typ: "" },
     ], false),
@@ -328,17 +328,15 @@ const typeMap: any = {
         { json: "f", js: "f", typ: "" },
         { json: "m", js: "m", typ: "" },
     ], false),
-    "Gini": o([
-        { json: "2019", js: "2019", typ: 3.14 },
-    ], false),
     "Idd": o([
         { json: "root", js: "root", typ: "" },
         { json: "suffixes", js: "suffixes", typ: a("") },
     ], false),
     "Languages": o([
-        { json: "aym", js: "aym", typ: "" },
-        { json: "que", js: "que", typ: "" },
-        { json: "spa", js: "spa", typ: "" },
+        { json: "aym", js: "aym", typ: u(undefined, "") },
+        { json: "que", js: "que", typ: u(undefined, "") },
+        { json: "spa", js: "spa", typ: u(undefined, "") },
+        { json: "eng", js: "eng", typ: u(undefined, "") },
     ], false),
     "Maps": o([
         { json: "googleMaps", js: "googleMaps", typ: "" },
@@ -350,9 +348,10 @@ const typeMap: any = {
         { json: "nativeName", js: "nativeName", typ: r("NativeName") },
     ], false),
     "NativeName": o([
-        { json: "aym", js: "aym", typ: r("Translation") },
-        { json: "que", js: "que", typ: r("Translation") },
-        { json: "spa", js: "spa", typ: r("Translation") },
+        { json: "aym", js: "aym", typ: u(undefined, r("Translation")) },
+        { json: "que", js: "que", typ: u(undefined, r("Translation")) },
+        { json: "spa", js: "spa", typ: u(undefined, r("Translation")) },
+        { json: "eng", js: "eng", typ: u(undefined, r("Translation")) },
     ], false),
     "Translation": o([
         { json: "official", js: "official", typ: "" },

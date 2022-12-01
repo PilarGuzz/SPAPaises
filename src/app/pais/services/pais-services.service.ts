@@ -17,6 +17,13 @@ export class PaisServicesService {
     return this.http.get<SPAPaises[]>(this.url+"name/" + clean)
  
   }
+  
+  buscarPaisCapital( query: string): Observable<SPAPaises[]> {
+    let clean = query.trim().toLowerCase();
+   
+    return this.http.get<SPAPaises[]>(this.url+"capital/" + clean)
+ 
+  }
 
   country(code:string): Observable<SPAPaises[]>{
     return this.http.get<SPAPaises[]>(this.url+"alpha/" + code)

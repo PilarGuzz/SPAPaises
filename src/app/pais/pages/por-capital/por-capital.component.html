@@ -1,1 +1,12 @@
-<p>por-capital works!</p>
+<h3>Por Capital</h3>
+<app-busqueda (search)="busqueda($event)" ></app-busqueda>
+    
+    <!--INICIO ERROR-->
+    <div *ngIf = "error" 
+    class="alert alert-danger">
+        No se encontró nada con el término {{nuevo}}
+    </div>
+    <!--FIN ERROR-->
+
+    <app-resultados [paises] = "paises"></app-resultados>
+  

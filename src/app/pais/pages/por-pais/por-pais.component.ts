@@ -21,8 +21,8 @@ export class PorPaisComponent implements OnInit {
   //   return this.PaisService.paises
   // }
 
-  busqueda(){
-    this.PaisService.buscarPais(this.nuevo)
+  busqueda(query : string){
+    this.PaisService.buscarPais(query)
     .subscribe({
       next: (resp) => {
         this.paises = resp

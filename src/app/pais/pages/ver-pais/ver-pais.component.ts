@@ -10,20 +10,17 @@ import { PaisServicesService } from '../../services/pais-services.service';
 })
 export class VerPaisComponent implements OnInit {
   code: string= "";
-  pais: any;
+  pais!: SPAPaises;
 
-  constructor(private paisService : PaisServicesService, private route: ActivatedRoute) {
-    console.log(route.snapshot.params['id'])
-
-    this.paisService.country(this.code)
-    .subscribe({
-      next: (resp) => {return resp[0]},
-      error: (error) => console.log(error)
-    })
-  }
+  constructor(private paisService : PaisServicesService, private route: ActivatedRoute) {  }
 
   ngOnInit(): void {
     this.code = this.route.snapshot.params['id'];
+    this.paisService.country(this.code)
+    .subscribe({
+      next: (resp) => {this.pais= resp[0]},
+      error: (error) => console.log(error)
+    })
   }
 
 
